@@ -1,6 +1,6 @@
   const sliderContainer = document.createElement("div");
   sliderContainer.classList.add("slider");
-  document.body.prepend(sliderContainer); // Ajouter au début après le chargement du DOM
+  document.body.prepend(sliderContainer); 
 
   const images = [
     "img/1.jpeg",
@@ -28,8 +28,8 @@
   styles.textContent = `
     .slider {
       position: relative;
-      width: 700px;
-      height: 400px;
+      width: 800px;
+      height: 600px;
       margin: 50px auto;
       overflow: hidden;
     }
@@ -53,15 +53,20 @@
     }
     .prev { left: 10px; }
     .next { right: 10px; }
-    button:hover { color : black};
-
-  `;
+    button:hover { color : black; opacity: 0.8}
+    body { background-color : #101114 }
+    h1 { text-align: center;
+    color: #00ffc4;
+    text-transform: uppercase;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 800;
+    font-size: 42px;} `;
+  
   document.head.appendChild(styles); 
 
   let index = 0;
 function showImage(i) {
 index = (i + images.length) % images.length;
-// Gestion du débordement
 imgElement.src = images[index];
 }
 
@@ -72,7 +77,14 @@ prevButton.addEventListener('click', () => {
 nextButton.addEventListener('click', () => {
     showImage(index + 1)
 })
-setInterval(() => showImage(index + 1), 3000);
+// setInterval(() => showImage(index + 1), 3000);
 
-
+// Add keyboard support
+document.addEventListener("keydown", (event) => {
+   if (event.key === "ArrowRight") {
+    showImage(index + 1)
+   } else if (event.key === "ArrowLeft") {
+      showImage(index - 1)
+   }
+})
 
